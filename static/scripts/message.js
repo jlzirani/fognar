@@ -90,11 +90,11 @@ applications.submit_new_message = Backbone.View.extend({
 applications.thread_view = Backbone.View.extend({
     initialize: function() {
         this.model.attributes.messages.bind("change", this.render, this);
-        this.name = "moi";
+        this.name = "me";
         this.render();
     },
     render: function() {
-        console.log("Je me render: " + this.name);
+        console.log("Rendering : " + this.name);
         //console.log(JSON.stringify(this.model.toJSON()));
         this.$el.html(templates['tpl-thread-thread']({
             thread: this.model.toJSON(),

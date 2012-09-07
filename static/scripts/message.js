@@ -76,11 +76,15 @@ applications.submit_new_message = Backbone.View.extend({
             return;
         }
         this.$el.find("textarea").val("");
+        var now = new Date();
+        now.setHours(now.getHours()+2);
+        now = now.toISOString();
         var new_message = new models.message({
             text: text,
             thread: this.model.id,
             user: window.profile.id, // FIXME stupid, should detect user on django side
             reference: null,
+            created: now,
         });
         this.model.attributes.messages.add(new_message);
         new_message.save();
@@ -138,11 +142,15 @@ applications.thread = Backbone.View.extend({
         var category = this.$el.find("select").val();
         var subject = this.$el.find("textarea").val();
         var self = this;
+        var now = new Date();
+        now.setHours(now.getHours()+2);
+        now = now.toISOString();
         var new_thread = new models.thread({
             subject: subject,
             category: category,
             user: window.profile.id, // FIXME stupid, should detect user on django side
             course: self.context.get('id'),
+            created: now,
         })
         new_thread.save();
         this.threads.unshift(new_thread);

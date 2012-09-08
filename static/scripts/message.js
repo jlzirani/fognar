@@ -77,7 +77,6 @@ applications.submit_new_message = Backbone.View.extend({
         }
         this.$el.find("textarea").val("");
         var now = new Date();
-        now.setHours(now.getHours()+2);
         now = now.toISOString();
         var new_message = new models.message({
             text: text,
@@ -143,7 +142,6 @@ applications.thread = Backbone.View.extend({
         var subject = this.$el.find("textarea").val();
         var self = this;
         var now = new Date();
-        now.setHours(now.getHours()+2);
         now = now.toISOString();
         var new_thread = new models.thread({
             subject: subject,

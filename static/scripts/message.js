@@ -76,10 +76,13 @@ applications.submit_new_message = Backbone.View.extend({
             return;
         }
         this.$el.find("textarea").val("");
+        var now = new Date();
+        now = now.toISOString();
         var new_message = new models.message({
             text: text,
             thread: this.model.id,
             reference: null,
+            created: now,
         });
         this.model.attributes.messages.add(new_message);
         new_message.save();
@@ -89,11 +92,11 @@ applications.submit_new_message = Backbone.View.extend({
 applications.thread_view = Backbone.View.extend({
     initialize: function() {
         this.model.attributes.messages.bind("change", this.render, this);
-        this.name = "moi";
+        this.name = "me";
         this.render();
     },
     render: function() {
-        console.log("Je me render: " + this.name);
+        console.log("Rendering : " + this.name);
         //console.log(JSON.stringify(this.model.toJSON()));
         this.$el.html(templates['tpl-thread-thread']({
             thread: this.model.toJSON(),
@@ -137,10 +140,13 @@ applications.thread = Backbone.View.extend({
         var category = this.$el.find("select").val();
         var subject = this.$el.find("textarea").val();
         var self = this;
+        var now = new Date();
+        now = now.toISOString();
         var new_thread = new models.thread({
             subject: subject,
             category: category,
             course: self.context.get('id'),
+            created: now,
         })
         new_thread.save();
         this.threads.unshift(new_thread);

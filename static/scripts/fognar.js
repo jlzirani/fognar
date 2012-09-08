@@ -12,6 +12,10 @@ Handlebars.registerHelper('get_name', function(item, options) {
         return item.app + ' #' + item.id;
 });
 
+Handlebars.registerHelper('pretty_date', function(dirtyDate) {
+    return prettyDate(dirtyDate);
+});
+
 applications.navbar = Backbone.View.extend({
     initialize: function(params) {
         console.log("initialize navbar view");

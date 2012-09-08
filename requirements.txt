@@ -4,3 +4,4 @@ django-extensions
 djangbone
 pyPdf
 django-template-fragments
+pytz
